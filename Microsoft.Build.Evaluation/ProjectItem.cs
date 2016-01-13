@@ -31,7 +31,7 @@ namespace Microsoft.Build.Evaluation
         }
         public string GetMetadataValue(string name)
         {
-            return Element.Descendants(Element.Document.Root.Name.Namespace + name).First().Value;
+            return Element.Descendants(Element.Document.Root.Name.Namespace + name).FirstOrDefault()?.Value;
         }
     }
 }

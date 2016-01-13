@@ -243,7 +243,12 @@ namespace OmniSharp.Solution
                     ? item.GetMetadataValue("Name") 
                     : Path.GetFileNameWithoutExtension(item.EvaluatedInclude);
 
-                var referenceGuid = Guid.Parse(item.GetMetadataValue("Project"));
+				var projVal = item.GetMetadataValue("Project");
+				if( projVal == null )
+					continue;
+                var referenceGuid = Guid.Parse(projVal);
+				if( referenceGuid == null )
+					continue;
                 _logger.Debug("Adding project reference {0}, {1}", projectName, referenceGuid);
                 AddReference(new ProjectReference(_solution, projectName, referenceGuid));
             }
